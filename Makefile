@@ -6,7 +6,7 @@
 #    By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 11:28:13 by mherrezu          #+#    #+#              #
-#    Updated: 2023/01/25 10:43:31 by mherrezu         ###   ########.fr        #
+#    Updated: 2023/02/15 12:20:01 by mherrezu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -D BUFFER_SIZE=42
+CFLAGS = -Wall -Werror -Wextra -D BUFFER_SIZE=10 -g
 
 RM = rm -rf
 
