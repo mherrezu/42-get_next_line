@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:20:22 by mherrezu          #+#    #+#             */
-/*   Updated: 2023/02/21 13:22:52 by mherrezu         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:38:08 by mherrezu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char	*save;
+	static char	*save[INT_MAX];
 	char		*line;
 
-	if (!save)
-		save = NULL;
+	if (!save[fd])
+		save[fd] = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	save = ft_readline(fd, save);
-	if (!save)
+	save[fd] = ft_readline(fd, save[fd]);
+	if (!save[fd])
 		return (NULL);
-	line = return_line(save);
-	save = freesave(save);
+	line = return_line(save[fd]);
+	save[fd] = freesave(save[fd]);
 	return (line);
 }
 
