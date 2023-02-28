@@ -6,7 +6,7 @@
 /*   By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:28:05 by mherrezu          #+#    #+#             */
-/*   Updated: 2023/02/21 13:54:35 by mherrezu         ###   ########.fr       */
+/*   Updated: 2023/02/28 12:31:34 by mherrezu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_strlen(char *str)
 	if (!str)
 		return (0);
 	i = 0;
-	while (str[i] && str[i] != '\0')
+	while (str[i])
 	{
 		i++;
 	}

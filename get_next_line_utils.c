@@ -6,7 +6,7 @@
 /*   By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:28:05 by mherrezu          #+#    #+#             */
-/*   Updated: 2023/02/21 13:11:47 by mherrezu         ###   ########.fr       */
+/*   Updated: 2023/02/28 19:00:47 by mherrezu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ char	*ft_strchr(char *str, int ch)
 	return (NULL);
 }
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-	int	i;
+	size_t	i;
 
 	if (!str)
 		return (0);
 	i = 0;
-	while (str[i] && str[i] != '\0')
+	while (str[i])
 	{
 		i++;
 	}

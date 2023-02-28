@@ -6,12 +6,20 @@
 /*   By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:28:07 by mherrezu          #+#    #+#             */
-/*   Updated: 2023/02/22 13:03:27 by mherrezu         ###   ########.fr       */
+/*   Updated: 2023/02/28 12:29:56 by mherrezu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
+
+# ifndef FD_MAX
+#  define FD_MAX 4096
+# endif
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 
 # include <stdio.h>
 # include <stdlib.h>

@@ -6,12 +6,16 @@
 /*   By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:28:07 by mherrezu          #+#    #+#             */
-/*   Updated: 2023/02/22 13:03:33 by mherrezu         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:15:58 by mherrezu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -27,6 +31,6 @@ char		*return_line(char	*save);
 char		*freesave(char	*save);
 char		*ft_strjoin(char *save, char *buf);
 char		*ft_strchr(char *str, int ch);
-int			ft_strlen(char *str);
+size_t		ft_strlen(char *str);
 
 #endif

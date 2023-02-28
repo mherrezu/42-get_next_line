@@ -6,7 +6,7 @@
 /*   By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:20:22 by mherrezu          #+#    #+#             */
-/*   Updated: 2023/02/21 13:22:52 by mherrezu         ###   ########.fr       */
+/*   Updated: 2023/02/28 19:09:44 by mherrezu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,24 @@ char	*get_next_line(int fd)
 	static char	*save;
 	char		*line;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		if (save == NULL)
+			return (NULL);
+		return (free(save), save = NULL, NULL);
+	}
 	if (!save)
 		save = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
 	save = ft_readline(fd, save);
-	if (!save)
-		return (NULL);
-	line = return_line(save);
-	save = freesave(save);
-	return (line);
+	if (save)
+	{
+		line = return_line(save);
+		save = freesave(save);
+		if (line)
+			return (line);
+		return (free(save), save = NULL, line);
+	}
+	return (free(save), save = NULL, NULL);
 }
 
 //Read and check '\n'. It's necessary to check rbytes & save to avoid 
@@ -38,12 +46,12 @@ char	*ft_readline(int fd, char *save)
 
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
-		return (free(buf), NULL);
+		return (free(save), NULL);
 	rbytes = 2;
 	while (!ft_strchr(save, '\n') && rbytes > 0)
 	{
 		rbytes = read(fd, buf, BUFFER_SIZE);
-		if (rbytes == -1)
+		if (rbytes < 0)
 			return (free(buf), free(save), NULL);
 		buf[rbytes] = 0;
 		save = join_free(save, buf);
@@ -77,17 +85,17 @@ char	*return_line(char	*save)
 		return (NULL);
 	while (save[i] && save[i] != '\n')
 		i++;
-	line = (char *)malloc((i + 2) * sizeof(char));
+	if (save[i] == '\n')
+		i++;
+	line = (char *)malloc((i + 1) * sizeof(char));
 	if (!line)
 		return (free(line), NULL);
-	while (c <= i)
+	line[i] = '\0';
+	while (c < i)
 	{
 		line[c] = save[c];
 		c++;
 	}
-	if (save[i] && save[i] == '\n')
-		line[i] = '\n';
-	line[++i] = '\0';
 	return (line);
 }
 
@@ -99,18 +107,19 @@ char	*freesave(char	*save)
 	int		c;
 
 	i = 0;
-	while (save[i] != '\n' && save[i] != '\0')
+	while (save[i] && save[i] != '\n')
 		i++;
 	if (!save[i])
-		return (free(save), NULL);
+		return (free(save), save = NULL, NULL);
+	if (save[i] == '\n')
+		i++;
 	c = ft_strlen(save) - i + 1;
 	new_save = (char *)malloc(c * sizeof(char));
 	if (!new_save)
-		return (free(new_save), NULL);
-	i = i + 1;
+		return (free(new_save), free(save), NULL);
 	c = 0;
-	while (save[i] != '\0')
+	while (save[i] && save[i] != '\0')
 		new_save[c++] = save[i++];
 	new_save[c] = '\0';
-	return (free(save), new_save);
+	return (free(save), save = NULL, new_save);
 }
